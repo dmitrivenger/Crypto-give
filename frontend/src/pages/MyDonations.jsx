@@ -15,8 +15,8 @@ export default function MyDonations() {
         <Header />
         <main className="max-w-2xl mx-auto px-4 py-24 text-center">
           <div className="text-5xl mb-6">🔒</div>
-          <h1 className="font-serif text-3xl font-bold text-white mb-4">{t('connectYourWallet')}</h1>
-          <p className="mb-10 leading-relaxed" style={{ color: 'rgba(255,255,255,0.50)' }}>{t('connectToViewHistory')}</p>
+          <h1 className="font-serif text-3xl font-bold mb-4" style={{ color: '#2d2416' }}>{t('connectYourWallet')}</h1>
+          <p className="mb-10 leading-relaxed font-light" style={{ color: '#5a5246' }}>{t('connectToViewHistory')}</p>
           <button onClick={connect} className="btn-primary btn-gold-shimmer text-base px-8 py-4">
             {t('connectWalletBtn')}
           </button>
@@ -31,8 +31,8 @@ export default function MyDonations() {
       <main className="max-w-6xl mx-auto px-4 py-10">
         <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-white">{t('myDonationsTitle')}</h1>
-            <p className="text-sm font-mono mt-1.5" style={{ color: 'rgba(255,255,255,0.35)' }}>{address}</p>
+            <h1 className="font-serif text-3xl font-bold" style={{ color: '#2d2416' }}>{t('myDonationsTitle')}</h1>
+            <p className="text-sm font-mono mt-1.5 font-light" style={{ color: '#5a5246' }}>{address}</p>
           </div>
           <button onClick={() => navigate('/')} className="btn-secondary text-sm py-2 px-5">
             {t('makeADonation')}

@@ -24,7 +24,7 @@ export default function FAQ() {
           </svg>
         </div>
 
-        <h2 className="font-serif text-3xl font-bold text-center mb-12" style={{ color: '#F5D78E' }}>
+        <h2 className="font-serif text-3xl font-bold text-center mb-12" style={{ color: '#2d2416' }}>
           {t('faqTitle')}
         </h2>
 
@@ -34,19 +34,22 @@ export default function FAQ() {
               key={i}
               className="rounded-2xl overflow-hidden cursor-pointer transition-all duration-200"
               style={{
-                background: open === i ? 'rgba(42,53,96,0.45)' : '#1E2435',
-                border: open === i ? '1px solid rgba(201,168,76,0.30)' : '1px solid rgba(255,255,255,0.07)',
+                background: open === i
+                  ? 'linear-gradient(135deg, #ffffff 0%, #f4e8d8 100%)'
+                  : 'rgba(255, 255, 255, 0.70)',
+                border: open === i ? '2px solid #8b6f47' : '2px solid #d4af8f',
+                boxShadow: open === i ? '0 8px 24px rgba(139, 111, 71, 0.14)' : 'none',
               }}
               onClick={() => setOpen(open === i ? null : i)}
             >
               <div className="flex items-center justify-between px-5 py-4">
-                <h3 className="font-semibold text-sm pr-4" style={{ color: open === i ? '#E2B96F' : 'rgba(255,255,255,0.85)' }}>
+                <h3 className="font-bold text-sm pr-4" style={{ color: open === i ? '#8b6f47' : '#2d2416' }}>
                   {faq.q}
                 </h3>
                 <span
                   className="flex-shrink-0 transition-transform duration-200"
                   style={{
-                    color: open === i ? '#E2B96F' : 'rgba(255,255,255,0.30)',
+                    color: open === i ? '#8b6f47' : 'rgba(90, 82, 70, 0.45)',
                     transform: open === i ? 'rotate(180deg)' : 'rotate(0deg)',
                   }}
                 >
@@ -55,7 +58,7 @@ export default function FAQ() {
               </div>
               {open === i && (
                 <div className="px-5 pb-5">
-                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{faq.a}</p>
+                  <p className="text-sm leading-relaxed font-light" style={{ color: '#5a5246' }}>{faq.a}</p>
                 </div>
               )}
             </div>

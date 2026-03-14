@@ -93,39 +93,63 @@ export default function DonationForm({ organization }) {
 
   const recipientAddress = (organization.blockchains || []).find(b => b.name === selectedBlockchain)?.address
 
+  const selectorActive = {
+    background: 'linear-gradient(135deg, #d4af8f, #8b6f47)',
+    color: '#ffffff',
+    border: '2px solid rgba(255,255,255,0.25)',
+  }
+  const selectorInactive = {
+    background: 'rgba(255, 255, 255, 0.70)',
+    color: '#5a5246',
+    border: '1px solid #d4af8f',
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="card max-w-lg mx-auto">
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-lg mx-auto rounded-2xl p-6"
+      style={{
+        background: 'linear-gradient(135deg, #ffffff 0%, #f4e8d8 100%)',
+        border: '2px solid #d4af8f',
+        boxShadow: '0 16px 48px rgba(139, 111, 71, 0.14)',
+      }}
+    >
       {/* Org info */}
-      <div className="mb-6 pb-6 border-b border-gray-800">
+      <div className="mb-6 pb-6" style={{ borderBottom: '1px solid rgba(212, 175, 143, 0.40)' }}>
         <div className="flex items-center gap-3 mb-3">
-          <div className="h-10 w-10 rounded-xl bg-indigo-900/50 border border-indigo-800/50 flex items-center justify-center text-xl">🏛️</div>
+          <div
+            className="h-10 w-10 rounded-xl flex items-center justify-center overflow-hidden"
+            style={{ background: 'rgba(212, 175, 143, 0.20)', border: '1px solid rgba(212, 175, 143, 0.45)' }}
+          >
+            {organization.logoUrl
+              ? <img src={organization.logoUrl} alt={organization.name} className="h-8 w-8 object-contain rounded-lg" />
+              : <span className="text-xl">🏛️</span>
+            }
+          </div>
           <div>
-            <h2 className="font-bold text-white">{organization.name}</h2>
-            <p className="text-xs text-gray-500">Tax ID: {organization.taxId}</p>
+            <h2 className="font-bold" style={{ color: '#2d2416' }}>{organization.name}</h2>
+            <p className="text-xs font-light" style={{ color: '#5a5246' }}>Tax ID: {organization.taxId}</p>
           </div>
         </div>
         {recipientAddress && (
-          <div className="bg-gray-800/50 rounded-lg p-3">
-            <p className="text-xs text-gray-500 mb-1">Recipient Address ({BLOCKCHAIN_LABELS[selectedBlockchain]})</p>
-            <p className="text-xs font-mono text-gray-300 break-all">{recipientAddress}</p>
+          <div className="rounded-lg p-3" style={{ background: 'rgba(212, 175, 143, 0.12)', border: '1px solid rgba(212, 175, 143, 0.35)' }}>
+            <p className="text-xs mb-1" style={{ color: '#5a5246' }}>Recipient Address ({BLOCKCHAIN_LABELS[selectedBlockchain]})</p>
+            <p className="text-xs font-mono break-all" style={{ color: '#2d2416' }}>{recipientAddress}</p>
           </div>
         )}
       </div>
 
       {/* Blockchain selector */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-400 mb-2">Blockchain</label>
+        <label className="block text-sm font-bold mb-2 uppercase tracking-wide" style={{ color: '#2d2416', letterSpacing: '0.06em' }}>Blockchain</label>
         <div className="flex gap-2">
           {availableBlockchains.map(bc => (
             <button
               key={bc}
               type="button"
               onClick={() => setSelectedBlockchain(bc)}
-              className={`flex-1 py-2 px-3 rounded-xl text-sm font-medium transition-colors ${
-                selectedBlockchain === bc
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-800 text-gray-400 hover:text-white border border-gray-700'
-              }`}
+              className="flex-1 py-2 px-3 rounded-xl text-sm font-bold transition-all duration-150"
+              style={selectedBlockchain === bc ? selectorActive : selectorInactive}
             >
               {BLOCKCHAIN_LABELS[bc] || bc}
             </button>
@@ -135,18 +159,15 @@ export default function DonationForm({ organization }) {
 
       {/* Token selector */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-400 mb-2">Token</label>
+        <label className="block text-sm font-bold mb-2 uppercase tracking-wide" style={{ color: '#2d2416', letterSpacing: '0.06em' }}>Token</label>
         <div className="flex gap-2">
           {availableTokens.map(token => (
             <button
               key={token}
               type="button"
               onClick={() => setSelectedToken(token)}
-              className={`flex-1 py-2 px-3 rounded-xl text-sm font-medium transition-colors ${
-                selectedToken === token
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-800 text-gray-400 hover:text-white border border-gray-700'
-              }`}
+              className="flex-1 py-2 px-3 rounded-xl text-sm font-bold transition-all duration-150"
+              style={selectedToken === token ? selectorActive : selectorInactive}
             >
               {token}
             </button>
@@ -156,7 +177,7 @@ export default function DonationForm({ organization }) {
 
       {/* Amount */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-400 mb-2">Amount</label>
+        <label className="block text-sm font-bold mb-2 uppercase tracking-wide" style={{ color: '#2d2416', letterSpacing: '0.06em' }}>Amount</label>
         <div className="relative">
           <input
             type="number"
@@ -167,15 +188,16 @@ export default function DonationForm({ organization }) {
             onChange={e => setDonationAmount(e.target.value)}
             className="input pr-16 text-lg"
           />
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">{selectedToken}</span>
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-sm" style={{ color: '#8b6f47' }}>{selectedToken}</span>
         </div>
 
         {/* USD value */}
         <div className="mt-2 h-5">
           {priceLoading ? (
-            <span className="text-xs text-gray-500">Fetching price...</span>
+            <span className="text-xs font-light" style={{ color: '#5a5246' }}>Fetching price...</span>
           ) : usdValue !== null ? (
-            <span className={`text-sm font-medium ${usdValue < MIN_DONATION_USD ? 'text-yellow-400' : 'text-green-400'}`}>
+            <span className={`text-sm font-bold ${usdValue < MIN_DONATION_USD ? 'text-yellow-600' : ''}`}
+              style={usdValue >= MIN_DONATION_USD ? { color: '#2d7a3a' } : {}}>
               ≈ {formatUSD(usdValue)}
               {usdValue < MIN_DONATION_USD && ' (below $1 minimum)'}
             </span>
@@ -184,7 +206,7 @@ export default function DonationForm({ organization }) {
       </div>
 
       {error && (
-        <div className="mb-4 bg-red-950/50 border border-red-800 rounded-xl p-3 text-sm text-red-400">
+        <div className="mb-4 rounded-xl p-3 text-sm" style={{ background: 'rgba(254, 226, 226, 0.60)', border: '1px solid rgba(239, 68, 68, 0.35)', color: '#b91c1c' }}>
           {error}
         </div>
       )}
@@ -192,7 +214,7 @@ export default function DonationForm({ organization }) {
       <button
         type="submit"
         disabled={submitting || !isValidAmount(donationAmount)}
-        className="btn-primary w-full text-lg py-4"
+        className="btn-primary w-full text-base py-4"
       >
         {submitting ? (
           <span className="flex items-center justify-center gap-2">
@@ -201,11 +223,11 @@ export default function DonationForm({ organization }) {
         ) : !isConnected ? (
           'Connect Wallet to Donate'
         ) : (
-          `Review Donation →`
+          'Review Donation →'
         )}
       </button>
 
-      <p className="text-xs text-gray-600 text-center mt-4">
+      <p className="text-xs text-center mt-4 font-light" style={{ color: 'rgba(90, 82, 70, 0.60)' }}>
         🔒 No personal information is stored. Only your wallet address is recorded on-chain.
       </p>
     </form>

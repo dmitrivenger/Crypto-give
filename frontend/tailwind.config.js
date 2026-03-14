@@ -7,18 +7,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: {
-          950: '#0D1117',
-          900: '#161B27',
-          800: '#1E2435',
-          700: '#252D42',
-          600: '#2E3A5E',
+        cream: {
+          50:  '#ffffff',
+          100: '#faf6f0',
+          200: '#f4e8d8',
+          300: '#efe8dc',
+          400: '#e8d4b8',
         },
-        violet: {
-          950: '#1A2050',
-          900: '#2A3560',
-          800: '#3B4A8A',
-          700: '#4D5FA3',
+        warm: {
+          100: '#f4e8d8',
+          200: '#e8d4b8',
+          300: '#d4c5b0',
+          400: '#d4af8f',
+          500: '#c9a070',
+          600: '#8b6f47',
+          700: '#6b5738',
+          800: '#5a5246',
+          900: '#2d2416',
         },
         gold: {
           100: '#FDF5DC',
@@ -32,7 +37,7 @@ export default {
       },
       fontFamily: {
         serif: ['"Playfair Display"', 'Georgia', 'serif'],
-        sans:  ['"Inter"', 'system-ui', 'sans-serif'],
+        sans:  ['"Lato"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         gold:    '0 0 24px rgba(201,168,76,0.30)',

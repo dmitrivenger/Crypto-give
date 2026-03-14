@@ -30,10 +30,18 @@ export default function Donate() {
       <Header />
       <main className="max-w-6xl mx-auto px-4 py-10">
         {/* Breadcrumb */}
-        <nav className="text-sm text-gray-500 mb-8 flex items-center gap-2">
-          <Link to="/" className="hover:text-gray-300 transition-colors">Home</Link>
-          <span>›</span>
-          <span className="text-gray-300">{organization?.name || 'Donate'}</span>
+        <nav className="text-sm mb-8 flex items-center gap-2" style={{ color: '#5a5246' }}>
+          <Link
+            to="/"
+            className="transition-colors font-medium"
+            style={{ color: '#8b6f47' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#6b5738'}
+            onMouseLeave={e => e.currentTarget.style.color = '#8b6f47'}
+          >
+            Home
+          </Link>
+          <span style={{ color: 'rgba(90, 82, 70, 0.45)' }}>›</span>
+          <span className="font-light" style={{ color: '#5a5246' }}>{organization?.name || 'Donate'}</span>
         </nav>
 
         {loading && (
@@ -44,7 +52,7 @@ export default function Donate() {
 
         {error && (
           <div className="text-center py-20">
-            <p className="text-red-400 mb-4">{error}</p>
+            <p className="mb-4 font-medium" style={{ color: '#b91c1c' }}>{error}</p>
             <button onClick={() => navigate('/')} className="btn-secondary">← Back to Home</button>
           </div>
         )}
@@ -52,8 +60,8 @@ export default function Donate() {
         {!loading && organization && (
           <>
             <div className="text-center mb-10">
-              <h1 className="text-3xl font-bold text-white mb-2">Donate to {organization.name}</h1>
-              <p className="text-gray-400">Your donation will be recorded on the blockchain</p>
+              <h1 className="text-3xl font-bold font-serif mb-2" style={{ color: '#2d2416' }}>Donate to {organization.name}</h1>
+              <p className="font-light" style={{ color: '#5a5246' }}>Your donation will be recorded on the blockchain</p>
             </div>
             <DonationForm organization={organization} />
           </>

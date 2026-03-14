@@ -30,14 +30,28 @@ export default function ConfirmDonation() {
     <div className="min-h-screen">
       <Header />
       <main className="max-w-6xl mx-auto px-4 py-10">
-        <nav className="text-sm text-gray-500 mb-8 flex items-center gap-2">
-          <Link to="/" className="hover:text-gray-300 transition-colors">Home</Link>
-          <span>›</span>
-          <Link to={`/donate/${orgId}`} className="hover:text-gray-300 transition-colors">
+        <nav className="text-sm mb-8 flex items-center gap-2" style={{ color: '#5a5246' }}>
+          <Link
+            to="/"
+            className="font-medium transition-colors"
+            style={{ color: '#8b6f47' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#6b5738'}
+            onMouseLeave={e => e.currentTarget.style.color = '#8b6f47'}
+          >
+            Home
+          </Link>
+          <span style={{ color: 'rgba(90, 82, 70, 0.45)' }}>›</span>
+          <Link
+            to={`/donate/${orgId}`}
+            className="font-medium transition-colors"
+            style={{ color: '#8b6f47' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#6b5738'}
+            onMouseLeave={e => e.currentTarget.style.color = '#8b6f47'}
+          >
             {organization?.name || 'Donate'}
           </Link>
-          <span>›</span>
-          <span className="text-gray-300">Confirm</span>
+          <span style={{ color: 'rgba(90, 82, 70, 0.45)' }}>›</span>
+          <span className="font-light" style={{ color: '#5a5246' }}>Confirm</span>
         </nav>
 
         {loading ? (
@@ -47,8 +61,8 @@ export default function ConfirmDonation() {
         ) : organization ? (
           <>
             <div className="text-center mb-10">
-              <h1 className="text-3xl font-bold text-white mb-2">Send Your Donation</h1>
-              <p className="text-gray-400">Follow the instructions below to complete your donation</p>
+              <h1 className="text-3xl font-bold font-serif mb-2" style={{ color: '#2d2416' }}>Send Your Donation</h1>
+              <p className="font-light" style={{ color: '#5a5246' }}>Follow the instructions below to complete your donation</p>
             </div>
             <TransactionInstruction organization={organization} />
           </>

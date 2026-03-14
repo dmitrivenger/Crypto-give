@@ -33,11 +33,11 @@ export default function ConnectWalletButton() {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setDropdownOpen(o => !o)}
-        className="flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium transition-all duration-200"
+        className="flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-bold transition-all duration-200"
         style={{
-          background: 'rgba(42,53,96,0.70)',
-          border: '1px solid rgba(201,168,76,0.30)',
-          color: '#E2B96F',
+          background: 'rgba(212, 175, 143, 0.20)',
+          border: '2px solid #d4af8f',
+          color: '#8b6f47',
         }}
       >
         <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ background: '#4ade80' }} />
@@ -51,17 +51,17 @@ export default function ConnectWalletButton() {
         <div
           className="absolute right-0 mt-2 w-52 rounded-2xl z-50 overflow-hidden animate-scale-in"
           style={{
-            background: '#161B27',
-            border: '1px solid rgba(255,255,255,0.10)',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.7)',
+            background: '#faf6f0',
+            border: '2px solid #d4af8f',
+            boxShadow: '0 16px 48px rgba(139, 111, 71, 0.20)',
           }}
         >
           <div className="py-1.5">
             <button
               onClick={() => { setDropdownOpen(false); open() }}
               className="w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 transition-colors"
-              style={{ color: 'rgba(255,255,255,0.75)' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+              style={{ color: '#5a5246' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(212, 175, 143, 0.15)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               <span className="text-base">🔗</span> Switch Wallet
@@ -69,8 +69,8 @@ export default function ConnectWalletButton() {
             <button
               onClick={() => { setDropdownOpen(false); navigate('/my-donations') }}
               className="w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 transition-colors"
-              style={{ color: 'rgba(255,255,255,0.75)' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+              style={{ color: '#5a5246' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(212, 175, 143, 0.15)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               <span className="text-base">📋</span> {t('myDonations')}
@@ -79,8 +79,8 @@ export default function ConnectWalletButton() {
             <button
               onClick={() => { setDropdownOpen(false); disconnect() }}
               className="w-full text-left px-4 py-2.5 text-sm flex items-center gap-3 transition-colors"
-              style={{ color: '#fca5a5' }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(239,68,68,0.08)'}
+              style={{ color: '#b91c1c' }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.08)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
               <span className="text-base">🔌</span> Disconnect
