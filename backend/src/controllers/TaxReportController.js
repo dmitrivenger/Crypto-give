@@ -37,7 +37,7 @@ async function getTaxReport(req, res, next) {
     logger.info(`Generating ${format.toUpperCase()} report for ${walletAddress} year=${year}`);
 
     if (format === 'csv') {
-      const csv = TaxReportService.generateCSVReport(walletAddress, year, reportData.donations);
+      const csv = TaxReportService.generateCSVReport(walletAddress, year, reportData.donations, reportData.user);
       res.setHeader('Content-Type', 'text/csv');
       res.setHeader('Content-Disposition', `attachment; filename="tax_report_${walletAddress.substring(0, 10)}_${year}.csv"`);
       return res.send(csv);
@@ -45,7 +45,7 @@ async function getTaxReport(req, res, next) {
 
     // PDF
     const pdfBuffer = await TaxReportService.generatePDFReport(
-      walletAddress, year, reportData.donations, []
+      walletAddress, year, reportData.donations, [], reportData.user
     );
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename="tax_report_${walletAddress.substring(0, 10)}_${year}.pdf"`);

@@ -75,3 +75,18 @@ export async function getHealth() {
   const res = await client.get('/health')
   return res.data
 }
+
+export async function getUser(walletAddress) {
+  const res = await client.get(`/users/${walletAddress}`)
+  return res.data.data
+}
+
+export async function saveUser(walletAddress, profile) {
+  const res = await client.post(`/users/${walletAddress}`, profile)
+  return res.data.data
+}
+
+export async function deleteUser(walletAddress) {
+  const res = await client.delete(`/users/${walletAddress}`)
+  return res.data
+}

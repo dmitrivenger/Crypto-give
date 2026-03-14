@@ -1,93 +1,86 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { useAccount, useDisconnect } from 'wagmi'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { getUser, saveUser, deleteUser } from '../services/api'
 
 const WalletContext = createContext(null)
 
 export function WalletProvider({ children }) {
-  const [address, setAddress] = useState(null)
-  const [chainId, setChainId] = useState(null)
-  const [isConnecting, setIsConnecting] = useState(false)
-  const [error, setError] = useState(null)
+  const { address, isConnected, chainId } = useAccount()
+  const { disconnect: wagmiDisconnect } = useDisconnect()
+  const { open } = useWeb3Modal()
 
-  const isConnected = !!address
+  const [isConnecting, setIsConnecting] = useState(false)
+  const [user, setUser] = useState(null)
+  const [showProfileModal, setShowProfileModal] = useState(false)
+
+  async function loadUser(addr) {
+    try {
+      const data = await getUser(addr)
+      setUser(data)
+      if (!data.profileComplete) setShowProfileModal(true)
+    } catch (err) {
+      if (err.status === 404 || err.code === 'USER_NOT_FOUND') {
+        const created = await saveUser(addr, {})
+        setUser(created)
+        setShowProfileModal(true)
+      }
+    }
+  }
+
+  // Load user profile whenever address changes
+  useEffect(() => {
+    if (address) {
+      localStorage.setItem('walletAddress', address)
+      loadUser(address)
+    } else {
+      setUser(null)
+      setShowProfileModal(false)
+      localStorage.removeItem('walletAddress')
+    }
+  }, [address])
 
   const connect = useCallback(async () => {
-    if (!window.ethereum) {
-      setError('No Web3 wallet detected. Please install MetaMask.')
-      return false
-    }
     setIsConnecting(true)
-    setError(null)
     try {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-      const chainIdHex = await window.ethereum.request({ method: 'eth_chainId' })
-      const addr = accounts[0]
-      setAddress(addr)
-      setChainId(parseInt(chainIdHex, 16))
-      localStorage.setItem('walletAddress', addr)
-      return true
-    } catch (err) {
-      if (err.code === 4001) {
-        setError('Connection rejected by user.')
-      } else {
-        setError('Failed to connect wallet.')
-      }
-      return false
+      await open()
     } finally {
       setIsConnecting(false)
     }
-  }, [])
+  }, [open])
 
   const disconnect = useCallback(() => {
-    setAddress(null)
-    setChainId(null)
-    localStorage.removeItem('walletAddress')
-  }, [])
+    wagmiDisconnect()
+  }, [wagmiDisconnect])
 
-  // Restore connection on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('walletAddress')
-    if (saved && window.ethereum) {
-      window.ethereum.request({ method: 'eth_accounts' }).then(accounts => {
-        if (accounts.includes(saved)) {
-          setAddress(saved)
-          window.ethereum.request({ method: 'eth_chainId' }).then(hex => {
-            setChainId(parseInt(hex, 16))
-          })
-        } else {
-          localStorage.removeItem('walletAddress')
-        }
-      }).catch(() => {})
-    }
-  }, [])
+  const updateUser = useCallback(async (profile) => {
+    if (!address) return
+    const updated = await saveUser(address, profile)
+    setUser(updated)
+    return updated
+  }, [address])
 
-  // Listen for wallet events
-  useEffect(() => {
-    if (!window.ethereum) return
-
-    const onAccountsChanged = (accounts) => {
-      if (accounts.length === 0) {
-        disconnect()
-      } else {
-        setAddress(accounts[0])
-        localStorage.setItem('walletAddress', accounts[0])
-      }
-    }
-
-    const onChainChanged = (chainIdHex) => {
-      setChainId(parseInt(chainIdHex, 16))
-    }
-
-    window.ethereum.on('accountsChanged', onAccountsChanged)
-    window.ethereum.on('chainChanged', onChainChanged)
-
-    return () => {
-      window.ethereum.removeListener('accountsChanged', onAccountsChanged)
-      window.ethereum.removeListener('chainChanged', onChainChanged)
-    }
-  }, [disconnect])
+  const deleteAccount = useCallback(async () => {
+    if (!address) return
+    await deleteUser(address)
+    setUser(null)
+    wagmiDisconnect()
+  }, [address, wagmiDisconnect])
 
   return (
-    <WalletContext.Provider value={{ address, chainId, isConnected, isConnecting, error, connect, disconnect }}>
+    <WalletContext.Provider value={{
+      address,
+      chainId,
+      isConnected,
+      isConnecting,
+      user,
+      showProfileModal,
+      setShowProfileModal,
+      connect,
+      disconnect,
+      updateUser,
+      deleteAccount,
+    }}>
       {children}
     </WalletContext.Provider>
   )

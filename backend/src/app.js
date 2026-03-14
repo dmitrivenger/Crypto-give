@@ -14,6 +14,7 @@ const donationRoutes = require('./routes/donations');
 const taxReportRoutes = require('./routes/taxReports');
 const healthRoutes = require('./routes/health');
 const cryptoPriceRoutes = require('./routes/cryptoPrices');
+const userRoutes = require('./routes/users');
 
 // Jobs
 const blockchainMonitorJob = require('./jobs/blockchainMonitor');
@@ -55,6 +56,7 @@ app.use('/v1/donations', donationRoutes);
 app.use('/v1/tax-report', taxReportRoutes);
 app.use('/v1/health', healthRoutes);
 app.use('/v1/crypto-price', cryptoPriceRoutes);
+app.use('/v1/users', userRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

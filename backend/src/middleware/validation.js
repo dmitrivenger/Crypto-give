@@ -4,14 +4,14 @@ const schemas = {
   initiateDonation: Joi.object({
     orgId: Joi.number().integer().positive().required(),
     amount: Joi.alternatives().try(Joi.number().positive(), Joi.string().pattern(/^\d+\.?\d*$/)).required(),
-    token: Joi.string().uppercase().valid('ETH', 'USDC', 'MATIC', 'BTC').required(),
-    blockchain: Joi.string().valid('ethereum', 'polygon', 'bitcoin').required(),
+    token: Joi.string().uppercase().valid('ETH', 'USDC', 'USDT', 'MATIC', 'POL', 'BNB').required(),
+    blockchain: Joi.string().valid('ethereum', 'polygon', 'bsc').required(),
   }),
 
   confirmDonation: Joi.object({
     txHash: Joi.string().pattern(/^0x[0-9a-fA-F]{64}$/).required(),
     orgId: Joi.number().integer().positive().required(),
-    blockchain: Joi.string().valid('ethereum', 'polygon').required(),
+    blockchain: Joi.string().valid('ethereum', 'polygon', 'bsc').required(),
     token: Joi.string().uppercase().required(),
     amount: Joi.alternatives().try(Joi.number().positive(), Joi.string().pattern(/^\d+\.?\d*$/)).required(),
     donationId: Joi.string().optional(),
@@ -27,7 +27,7 @@ const schemas = {
   donationsQuery: Joi.object({
     year: Joi.number().integer().min(2020).max(2100).optional(),
     orgId: Joi.number().integer().positive().optional(),
-    blockchain: Joi.string().valid('ethereum', 'polygon').optional(),
+    blockchain: Joi.string().valid('ethereum', 'polygon', 'bsc').optional(),
     status: Joi.string().valid('pending', 'confirmed', 'failed').optional(),
   }),
 };

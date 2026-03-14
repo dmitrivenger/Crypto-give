@@ -3,25 +3,86 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
   body {
-    @apply bg-gray-950 text-gray-100 antialiased;
+    @apply bg-slate-50 dark:bg-[#080d1a] text-slate-900 dark:text-slate-100 antialiased;
+    transition: background-color 0.2s, color 0.2s;
   }
 }
 
 @layer components {
+  /* ── Buttons ── */
   .btn-primary {
-    @apply bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2
+           bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700
+           text-white font-semibold px-5 py-2.5 rounded-xl
+           transition-all duration-150 shadow-sm
+           disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-indigo-600;
   }
   .btn-secondary {
-    @apply bg-gray-800 hover:bg-gray-700 text-gray-100 font-semibold px-6 py-3 rounded-xl transition-all duration-200 border border-gray-700;
+    @apply inline-flex items-center justify-center gap-2
+           bg-white hover:bg-slate-50 active:bg-slate-100
+           dark:bg-slate-800 dark:hover:bg-slate-700 dark:active:bg-slate-600
+           text-slate-700 dark:text-slate-200 font-semibold px-5 py-2.5 rounded-xl
+           transition-all duration-150 border border-slate-200 dark:border-slate-700 shadow-sm
+           disabled:opacity-40 disabled:cursor-not-allowed;
   }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2
+           bg-red-600 hover:bg-red-500 active:bg-red-700
+           text-white font-semibold px-5 py-2.5 rounded-xl
+           transition-all duration-150 shadow-sm
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           text-slate-500 dark:text-slate-400
+           hover:text-slate-900 dark:hover:text-white
+           hover:bg-slate-100 dark:hover:bg-slate-800
+           px-3 py-2 rounded-xl transition-all duration-150;
+  }
+
+  /* ── Cards ── */
   .card {
-    @apply bg-gray-900 border border-gray-800 rounded-2xl p-6;
+    @apply bg-white dark:bg-slate-900
+           border border-slate-200 dark:border-slate-800
+           rounded-2xl p-6 shadow-sm;
+    transition: background-color 0.2s, border-color 0.2s;
   }
+  .card-hover {
+    @apply card hover:border-indigo-300 dark:hover:border-indigo-700
+           hover:shadow-md dark:hover:shadow-indigo-950/50
+           transition-all duration-200;
+  }
+
+  /* ── Form ── */
   .input {
-    @apply bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-gray-100 w-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-gray-500;
+    @apply w-full px-4 py-3 rounded-xl text-sm
+           bg-slate-50 dark:bg-slate-800/80
+           border border-slate-200 dark:border-slate-700
+           text-slate-900 dark:text-slate-100
+           placeholder-slate-400 dark:placeholder-slate-500
+           focus:outline-none focus:ring-2 focus:ring-indigo-500/60 focus:border-indigo-500
+           dark:focus:ring-indigo-500/40 dark:focus:border-indigo-500
+           transition-all duration-150;
   }
+
+  /* ── Badges ── */
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-chain {
+    @apply badge bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400
+           border border-slate-200 dark:border-slate-700;
+  }
+
+  /* ── Misc ── */
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500;
+  }
+  .divider {
+    @apply border-t border-slate-100 dark:border-slate-800;
   }
 }
