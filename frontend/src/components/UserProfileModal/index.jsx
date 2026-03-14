@@ -8,16 +8,14 @@ export default function UserProfileModal() {
   const { t } = useLanguage()
   const [form, setForm] = useState({
     firstName: user?.firstName || '',
-    lastName: user?.lastName || '',
-    email: user?.email || '',
+    lastName:  user?.lastName  || '',
+    email:     user?.email     || '',
     taxNumber: user?.taxNumber || '',
   })
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState(null)
 
-  function set(field, value) {
-    setForm(f => ({ ...f, [field]: value }))
-  }
+  function set(field, value) { setForm(f => ({ ...f, [field]: value })) }
 
   async function handleSave(e) {
     e.preventDefault()
@@ -37,39 +35,60 @@ export default function UserProfileModal() {
     }
   }
 
+  const labelStyle = {
+    display: 'block',
+    fontSize: '10px',
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: '0.10em',
+    color: 'rgba(255,255,255,0.35)',
+    marginBottom: '6px',
+  }
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl w-full max-w-md shadow-2xl shadow-black/20 overflow-hidden">
-        {/* Top gradient */}
-        <div className="h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,0.80)', backdropFilter: 'blur(12px)' }}
+    >
+      <div
+        className="w-full max-w-md rounded-2xl overflow-hidden animate-scale-in"
+        style={{ background: '#161B27', border: '1px solid rgba(255,255,255,0.09)', boxShadow: '0 24px 80px rgba(0,0,0,0.75)' }}
+      >
+        {/* Gold gradient top */}
+        <div style={{ height: '3px', background: 'linear-gradient(90deg, #A87A2D, #E2B96F, #F5D78E, #E2B96F, #A87A2D)' }} />
 
         {/* Header */}
-        <div className="px-6 pt-6 pb-5 border-b border-slate-100 dark:border-slate-800">
+        <div className="px-6 pt-6 pb-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-lg shadow-md shadow-indigo-500/30">
+            <div
+              className="h-10 w-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
+              style={{ background: 'linear-gradient(135deg, #A87A2D, #E2B96F)', color: '#0D1117' }}
+            >
               👤
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900 dark:text-white">{t('completeYourProfile')}</h2>
-              <p className="text-xs font-mono text-slate-400 dark:text-slate-500">{formatAddress(address)}</p>
+              <h2 className="font-serif text-base font-bold text-white">{t('completeYourProfile')}</h2>
+              <p className="text-xs font-mono mt-0.5" style={{ color: 'rgba(255,255,255,0.30)' }}>{formatAddress(address)}</p>
             </div>
           </div>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">{t('profileUsedForTax')}</p>
+          <p className="text-sm mt-3 leading-relaxed" style={{ color: 'rgba(255,255,255,0.50)' }}>
+            {t('profileUsedForTax')}
+          </p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSave} className="p-6 space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5 uppercase tracking-wide">
-                {t('firstName')} <span className="text-red-500">{t('required')}</span>
+              <label style={labelStyle}>
+                {t('firstName')} <span style={{ color: '#fca5a5' }}>{t('required')}</span>
               </label>
               <input type="text" placeholder="John" value={form.firstName}
                 onChange={e => set('firstName', e.target.value)} className="input" />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5 uppercase tracking-wide">
-                {t('lastName')} <span className="text-red-500">{t('required')}</span>
+              <label style={labelStyle}>
+                {t('lastName')} <span style={{ color: '#fca5a5' }}>{t('required')}</span>
               </label>
               <input type="text" placeholder="Smith" value={form.lastName}
                 onChange={e => set('lastName', e.target.value)} className="input" />
@@ -77,25 +96,31 @@ export default function UserProfileModal() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5 uppercase tracking-wide">
-              {t('emailAddress')} <span className="text-red-500">{t('required')}</span>
+            <label style={labelStyle}>
+              {t('emailAddress')} <span style={{ color: '#fca5a5' }}>{t('required')}</span>
             </label>
             <input type="email" placeholder="john@example.com" value={form.email}
               onChange={e => set('email', e.target.value)} className="input" />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5 uppercase tracking-wide">
-              {t('taxNumber')} <span className="text-slate-400 dark:text-slate-600 normal-case font-normal">({t('optional')})</span>
+            <label style={labelStyle}>
+              {t('taxNumber')}{' '}
+              <span style={{ color: 'rgba(255,255,255,0.25)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>
+                ({t('optional')})
+              </span>
             </label>
             <input type="text" placeholder="e.g. 123-45-6789" value={form.taxNumber}
               onChange={e => set('taxNumber', e.target.value)} className="input" />
           </div>
 
           {error && (
-            <div className="flex items-start gap-2 p-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30">
-              <span className="text-red-500 text-sm flex-shrink-0">⚠</span>
-              <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
+            <div
+              className="flex items-start gap-2 p-3 rounded-xl"
+              style={{ background: 'rgba(127,29,29,0.35)', border: '1px solid rgba(239,68,68,0.30)' }}
+            >
+              <span style={{ color: '#fca5a5', flexShrink: 0 }}>⚠</span>
+              <p className="text-sm" style={{ color: '#fca5a5' }}>{error}</p>
             </div>
           )}
 

@@ -33,6 +33,7 @@ const EXPLORER_URLS = {
   ethereum: 'https://etherscan.io',
   polygon:  'https://polygonscan.com',
   bsc:      'https://bscscan.com',
+  bitcoin:  'https://mempool.space/tx',
   tron:     'https://tronscan.org/#/transaction',
 };
 

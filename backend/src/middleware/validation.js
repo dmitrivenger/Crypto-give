@@ -1,18 +1,27 @@
 const Joi = require('joi');
 
+// Accept EVM tx hash (0x + 64 hex) OR BTC/TRX tx hash (64 hex, no prefix)
+const txHashSchema = Joi.alternatives().try(
+  Joi.string().pattern(/^0x[0-9a-fA-F]{64}$/),
+  Joi.string().pattern(/^[0-9a-fA-F]{64}$/)
+).required();
+
+const blockchainSchema = Joi.string().valid('ethereum', 'polygon', 'bsc', 'bitcoin', 'tron');
+const tokenSchema = Joi.string().uppercase().valid('ETH', 'USDC', 'USDT', 'POL', 'BNB', 'BTC', 'TRX');
+
 const schemas = {
   initiateDonation: Joi.object({
     orgId: Joi.number().integer().positive().required(),
     amount: Joi.alternatives().try(Joi.number().positive(), Joi.string().pattern(/^\d+\.?\d*$/)).required(),
-    token: Joi.string().uppercase().valid('ETH', 'USDC', 'USDT', 'MATIC', 'POL', 'BNB').required(),
-    blockchain: Joi.string().valid('ethereum', 'polygon', 'bsc').required(),
+    token: tokenSchema.required(),
+    blockchain: blockchainSchema.required(),
   }),
 
   confirmDonation: Joi.object({
-    txHash: Joi.string().pattern(/^0x[0-9a-fA-F]{64}$/).required(),
+    txHash: txHashSchema,
     orgId: Joi.number().integer().positive().required(),
-    blockchain: Joi.string().valid('ethereum', 'polygon', 'bsc').required(),
-    token: Joi.string().uppercase().required(),
+    blockchain: blockchainSchema.required(),
+    token: tokenSchema.required(),
     amount: Joi.alternatives().try(Joi.number().positive(), Joi.string().pattern(/^\d+\.?\d*$/)).required(),
     donationId: Joi.string().optional(),
   }),
@@ -27,7 +36,7 @@ const schemas = {
   donationsQuery: Joi.object({
     year: Joi.number().integer().min(2020).max(2100).optional(),
     orgId: Joi.number().integer().positive().optional(),
-    blockchain: Joi.string().valid('ethereum', 'polygon', 'bsc').optional(),
+    blockchain: blockchainSchema.optional(),
     status: Joi.string().valid('pending', 'confirmed', 'failed').optional(),
   }),
 };

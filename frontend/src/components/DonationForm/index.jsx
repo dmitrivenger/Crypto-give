@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { useWallet } from '../../contexts/WalletContext'
 import { useDonationContext } from '../../contexts/DonationContext'
 import { initiateDonation } from '../../services/api'
-import { TOKENS_BY_BLOCKCHAIN, BLOCKCHAIN_LABELS, MIN_DONATION_USD } from '../../utils/constants'
+import { TOKENS_BY_BLOCKCHAIN, BLOCKCHAIN_LABELS } from '../../utils/constants'
+
+const MIN_DONATION_USD = 1
 import { formatUSD, formatAddress } from '../../utils/formatters'
 import { isValidAmount } from '../../utils/validators'
 import LoadingSpinner from '../LoadingSpinner'

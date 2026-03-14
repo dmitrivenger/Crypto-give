@@ -9,14 +9,24 @@ import useOrganizations from '../hooks/useOrganizations'
 import { BLOCKCHAIN_LABELS } from '../utils/constants'
 import { formatAddress } from '../utils/formatters'
 
-// ── Delete confirm ────────────────────────────────────────────────────────────
+function StarOfDavid({ size = 14 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 115" fill="currentColor">
+      <polygon points="50,5 95,82 5,82" /><polygon points="50,110 5,33 95,33" />
+    </svg>
+  )
+}
+
 function DeleteConfirmModal({ onConfirm, onCancel, deleting, t }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl w-full max-w-sm shadow-2xl shadow-black/20 p-7 text-center">
-        <div className="h-14 w-14 rounded-2xl bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800/50 flex items-center justify-center mx-auto mb-4 text-2xl">⚠️</div>
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{t('deleteConfirmTitle')}</h3>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 leading-relaxed">{t('deleteConfirmText')}</p>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)' }}>
+      <div className="glass-dark w-full max-w-sm p-7 text-center animate-scale-in">
+        <div
+          className="h-14 w-14 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl"
+          style={{ background: 'rgba(127,29,29,0.40)', border: '1px solid rgba(239,68,68,0.30)' }}
+        >⚠️</div>
+        <h3 className="font-serif text-lg font-bold text-white mb-2">{t('deleteConfirmTitle')}</h3>
+        <p className="text-sm mb-6 leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>{t('deleteConfirmText')}</p>
         <div className="flex gap-3">
           <button onClick={onCancel} disabled={deleting} className="btn-secondary flex-1">{t('cancel')}</button>
           <button onClick={onConfirm} disabled={deleting} className="btn-danger flex-1">
@@ -28,7 +38,6 @@ function DeleteConfirmModal({ onConfirm, onCancel, deleting, t }) {
   )
 }
 
-// ── Profile card ──────────────────────────────────────────────────────────────
 function ProfileCard({ user, address, onEdit, onDelete, t }) {
   const fullName = user?.firstName && user?.lastName
     ? `${user.firstName} ${user.lastName}`
@@ -43,116 +52,147 @@ function ProfileCard({ user, address, onEdit, onDelete, t }) {
     : address?.slice(2, 4).toUpperCase() || '??'
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden mb-8">
-      {/* Gradient top strip */}
-      <div className="h-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
+    <div className="rounded-2xl overflow-hidden mb-8" style={{ background: '#1E2435', border: '1px solid rgba(255,255,255,0.08)' }}>
+      {/* Gold top strip */}
+      <div className="h-1" style={{ background: 'linear-gradient(90deg, #A87A2D, #E2B96F, #F5D78E, #E2B96F, #A87A2D)' }} />
 
       <div className="p-6">
         <div className="flex items-start justify-between flex-wrap gap-4">
           {/* Avatar + identity */}
           <div className="flex items-center gap-4">
-            <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg flex-shrink-0 shadow-lg shadow-indigo-500/30">
+            <div
+              className="h-14 w-14 rounded-2xl flex items-center justify-center text-lg font-bold flex-shrink-0"
+              style={{ background: 'linear-gradient(135deg, #A87A2D, #E2B96F)', color: '#0D1117', boxShadow: '0 0 16px rgba(201,168,76,0.30)' }}
+            >
               {initials}
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
+              <h2 className="text-lg font-bold font-serif text-white leading-tight">
                 {fullName || formatAddress(address)}
               </h2>
-              <p className="text-xs font-mono text-slate-400 dark:text-slate-500 mt-0.5">{address}</p>
+              <p className="text-xs font-mono mt-0.5" style={{ color: 'rgba(255,255,255,0.35)' }}>{address}</p>
               {memberDate && (
-                <p className="text-xs text-slate-400 dark:text-slate-600 mt-1">{t('memberSince')} {memberDate}</p>
+                <p className="text-xs mt-1" style={{ color: 'rgba(255,255,255,0.30)' }}>{t('memberSince')} {memberDate}</p>
               )}
             </div>
           </div>
 
           {/* Action buttons */}
           <div className="flex items-center gap-2">
-            <button onClick={onEdit}
-              className="flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100 dark:hover:bg-indigo-500/20 border border-indigo-200 dark:border-indigo-500/30 transition-colors">
+            <button
+              onClick={onEdit}
+              className="flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-xl transition-all duration-200"
+              style={{ background: 'rgba(42,53,96,0.70)', color: '#E2B96F', border: '1px solid rgba(201,168,76,0.25)' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(201,168,76,0.50)'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(201,168,76,0.25)'}
+            >
               ✏️ {t('editProfile')}
             </button>
-            <button onClick={onDelete}
-              className="flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-xl bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-500/20 border border-red-200 dark:border-red-500/30 transition-colors">
+            <button
+              onClick={onDelete}
+              className="flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-xl transition-all duration-200"
+              style={{ background: 'rgba(127,29,29,0.35)', color: '#fca5a5', border: '1px solid rgba(239,68,68,0.25)' }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(239,68,68,0.50)'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(239,68,68,0.25)'}
+            >
               🗑️ {t('deleteAccount')}
             </button>
           </div>
         </div>
 
         {/* Details row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-5 border-t border-slate-100 dark:border-slate-800">
-          <div>
-            <p className="section-label mb-1">{t('email')}</p>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300 truncate">
-              {user?.email || <span className="text-slate-400 dark:text-slate-600 font-normal">{t('notProvided')}</span>}
-            </p>
-          </div>
-          <div>
-            <p className="section-label mb-1">{t('taxNumberLabel')}</p>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              {user?.taxNumber || <span className="text-slate-400 dark:text-slate-600 font-normal">{t('notProvided')}</span>}
-            </p>
-          </div>
-          <div>
-            <p className="section-label mb-1">{t('profile')}</p>
-            <span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full ${
-              user?.profileComplete
-                ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30'
-                : 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/30'
-            }`}>
-              <span className="h-1.5 w-1.5 rounded-full bg-current" />
-              {user?.profileComplete ? t('profileComplete') : t('profileIncomplete')}
-            </span>
-          </div>
-          <div>
-            <p className="section-label mb-1">{t('taxReports')}</p>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">{t('taxFormats')}</p>
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          {[
+            { label: t('email'), value: user?.email },
+            { label: t('taxNumberLabel'), value: user?.taxNumber },
+            {
+              label: t('profile'),
+              custom: (
+                <span
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full"
+                  style={{
+                    background: user?.profileComplete ? 'rgba(22,101,52,0.40)' : 'rgba(120,53,15,0.40)',
+                    color: user?.profileComplete ? '#4ade80' : '#fbbf24',
+                    border: `1px solid ${user?.profileComplete ? 'rgba(74,222,128,0.25)' : 'rgba(251,191,36,0.25)'}`,
+                  }}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-current" />
+                  {user?.profileComplete ? t('profileComplete') : t('profileIncomplete')}
+                </span>
+              ),
+            },
+            { label: t('taxReports'), value: t('taxFormats') },
+          ].map((item, i) => (
+            <div key={i}>
+              <p className="section-label mb-1.5">{item.label}</p>
+              {item.custom
+                ? item.custom
+                : <p className="text-sm font-medium" style={{ color: item.value ? 'rgba(255,255,255,0.80)' : 'rgba(255,255,255,0.25)' }}>
+                    {item.value || t('notProvided')}
+                  </p>
+              }
+            </div>
+          ))}
         </div>
       </div>
     </div>
   )
 }
 
-// ── Org tile ──────────────────────────────────────────────────────────────────
 function OrgTile({ organization, onDonate, t }) {
   return (
-    <div className="card-hover flex flex-col group cursor-pointer" onClick={() => onDonate(organization)}>
-      {/* Logo area */}
-      <div className="h-20 w-full rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/60 dark:to-purple-950/40 border border-indigo-100 dark:border-indigo-900/50 flex items-center justify-center mb-5 text-4xl group-hover:scale-105 transition-transform duration-200">
+    <div
+      className="rounded-2xl p-5 flex flex-col cursor-pointer group transition-all duration-200"
+      style={{ background: '#1E2435', border: '1px solid rgba(255,255,255,0.07)' }}
+      onClick={() => onDonate(organization)}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = 'rgba(201,168,76,0.35)'
+        e.currentTarget.style.transform = 'translateY(-4px)'
+        e.currentTarget.style.boxShadow = '0 0 24px rgba(201,168,76,0.15), 0 12px 40px rgba(0,0,0,0.55)'
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+        e.currentTarget.style.transform = ''
+        e.currentTarget.style.boxShadow = ''
+      }}
+    >
+      <div
+        className="h-20 w-full rounded-xl flex items-center justify-center mb-4 text-4xl"
+        style={{ background: 'linear-gradient(135deg, rgba(42,53,96,0.80), rgba(26,32,80,0.60))', border: '1px solid rgba(201,168,76,0.15)' }}
+      >
         🏛️
       </div>
 
-      <div className="flex-1 flex flex-col">
-        <h3 className="font-bold text-slate-900 dark:text-white text-base mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-          {organization.name}
-        </h3>
-        {organization.description && (
-          <p className="text-slate-500 dark:text-slate-400 text-sm mb-3 line-clamp-2 leading-relaxed">{organization.description}</p>
-        )}
+      <h3 className="font-bold font-serif text-white mb-1 group-hover:text-[#E2B96F] transition-colors">
+        {organization.name}
+      </h3>
+      {organization.description && (
+        <p className="text-sm mb-3 line-clamp-2 leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+          {organization.description}
+        </p>
+      )}
 
-        <div className="mb-3">
-          <p className="section-label mb-1">501(c)(3) {t('taxId')}</p>
-          <p className="text-sm font-mono text-slate-600 dark:text-slate-400">{organization.taxId}</p>
-        </div>
-
-        <div className="flex flex-wrap gap-1.5 mb-5">
-          {(organization.blockchains || []).map(b => (
-            <span key={b.name} className="badge-chain">{BLOCKCHAIN_LABELS[b.name] || b.name}</span>
-          ))}
-        </div>
-
-        <button
-          className="btn-primary w-full mt-auto group-hover:shadow-lg group-hover:shadow-indigo-500/25 transition-shadow"
-          onClick={e => { e.stopPropagation(); onDonate(organization) }}
-        >
-          {t('donate')} →
-        </button>
+      <div className="mb-2">
+        <p className="section-label mb-1">501(c)(3) {t('taxId')}</p>
+        <p className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.45)' }}>{organization.taxId}</p>
       </div>
+
+      <div className="flex flex-wrap gap-1.5 mb-5 mt-2">
+        {(organization.blockchains || []).map(b => (
+          <span key={b.name} className="badge-chain">{BLOCKCHAIN_LABELS[b.name] || b.name}</span>
+        ))}
+      </div>
+
+      <button
+        className="btn-primary w-full mt-auto"
+        onClick={e => { e.stopPropagation(); onDonate(organization) }}
+      >
+        {t('donate')} →
+      </button>
     </div>
   )
 }
 
-// ── Dashboard ─────────────────────────────────────────────────────────────────
 export default function Dashboard() {
   const { address, user, setShowProfileModal, deleteAccount } = useWallet()
   const { t } = useLanguage()
@@ -165,29 +205,29 @@ export default function Dashboard() {
 
   async function handleDeleteAccount() {
     setDeleting(true)
-    try {
-      await deleteAccount()
-    } finally {
-      setDeleting(false)
-      setShowDeleteConfirm(false)
-    }
+    try { await deleteAccount() }
+    finally { setDeleting(false); setShowDeleteConfirm(false) }
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#080d1a]">
+    <div className="min-h-screen">
       <Header />
 
       <main className="max-w-6xl mx-auto px-4 py-10">
+
         {/* Greeting */}
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-            {t('welcomeBack')},{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
-              {firstName}
-            </span>{' '}
-            👋
-          </h1>
-          <p className="text-slate-500 dark:text-slate-400 mt-1.5">{t('chooseOrg')}</p>
+          <div className="flex items-center gap-3 mb-2">
+            <div style={{ color: 'rgba(201,168,76,0.40)' }}>
+              <StarOfDavid size={18} />
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-bold font-serif text-white">
+              {t('welcomeBack')},{' '}
+              <span className="text-gold">{firstName}</span>
+            </h1>
+            <span className="text-2xl">שָׁלוֹם</span>
+          </div>
+          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.45)' }}>{t('chooseOrg')}</p>
         </div>
 
         {/* Profile card */}
@@ -200,22 +240,21 @@ export default function Dashboard() {
         />
 
         {/* Orgs header */}
-        <div className="flex items-center justify-between mb-5">
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white">{t('organizations')}</h2>
-          <Link to="/my-donations" className="text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 font-medium transition-colors">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="font-serif text-lg font-bold" style={{ color: '#F5D78E' }}>{t('organizations')}</h2>
+          <Link
+            to="/my-donations"
+            className="text-sm font-medium transition-colors"
+            style={{ color: 'rgba(201,168,76,0.65)' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#E2B96F'}
+            onMouseLeave={e => e.currentTarget.style.color = 'rgba(201,168,76,0.65)'}
+          >
             {t('viewMyDonations')}
           </Link>
         </div>
 
-        {loading && (
-          <div className="flex justify-center py-20">
-            <LoadingSpinner text="Loading organizations..." />
-          </div>
-        )}
-
-        {error && (
-          <div className="text-center py-20 text-red-500 dark:text-red-400">{t('failedToLoad')}</div>
-        )}
+        {loading && <div className="flex justify-center py-20"><LoadingSpinner size="lg" /></div>}
+        {error && <div className="text-center py-20 text-red-400">{t('failedToLoad')}</div>}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {organizations.map(org => (
@@ -224,7 +263,7 @@ export default function Dashboard() {
         </div>
 
         {!loading && !error && organizations.length === 0 && (
-          <div className="text-center py-20 text-slate-400 dark:text-slate-600">{t('noOrgs')}</div>
+          <div className="text-center py-20" style={{ color: 'rgba(255,255,255,0.30)' }}>{t('noOrgs')}</div>
         )}
       </main>
 
