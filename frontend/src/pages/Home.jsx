@@ -16,12 +16,26 @@ function StarOfDavid({ size = 14 }) {
   )
 }
 
+function BitcoinCoin() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="14" r="13" fill="#f59e0b" fillOpacity="0.85"/>
+      <circle cx="14" cy="14" r="11" fill="#fbbf24" fillOpacity="0.5"/>
+      <ellipse cx="10" cy="9" rx="4" ry="2" fill="white" fillOpacity="0.3" transform="rotate(-20 10 9)"/>
+      <path d="M12 8.5h4a2 2 0 0 1 0 4h-4M12 12.5h4.5a2 2 0 0 1 0 4H12" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="12" y1="8.5" x2="12" y2="16.5" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="13.5" y1="7" x2="13.5" y2="8.5" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="13.5" y1="16.5" x2="13.5" y2="18" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
 function HowItWorks() {
   const { t } = useLanguage()
   const steps = [
-    { icon: '🔗', titleKey: 'step1Title', descKey: 'step1Desc', num: '01' },
-    { icon: '🪙', titleKey: 'step2Title', descKey: 'step2Desc', num: '02' },
-    { icon: '📄', titleKey: 'step3Title', descKey: 'step3Desc', num: '03' },
+    { icon: '🔗', titleKey: 'step1Title', descKey: 'step1Desc' },
+    { icon: <BitcoinCoin />, titleKey: 'step2Title', descKey: 'step2Desc' },
+    { icon: '📄', titleKey: 'step3Title', descKey: 'step3Desc' },
   ]
   return (
     <section className="py-20 px-4" style={{ borderTop: '1px solid rgba(212, 175, 143, 0.30)' }}>
@@ -29,39 +43,45 @@ function HowItWorks() {
         <h2 className="font-serif text-2xl font-bold text-center mb-14" style={{ color: '#2d2416' }}>
           {t('howItWorks')}
         </h2>
-        <div className="grid sm:grid-cols-3 gap-8">
+        <div className="flex items-center justify-center gap-0">
           {steps.map((step, i) => (
-            <div
-              key={i}
-              className="rounded-2xl p-6 text-center transition-all duration-200"
-              style={{
-                background: 'linear-gradient(135deg, #ffffff 0%, #f4e8d8 100%)',
-                border: '2px solid #d4af8f',
-                boxShadow: '0 8px 24px rgba(139, 111, 71, 0.10)',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = '#8b6f47'
-                e.currentTarget.style.transform = 'translateY(-4px)'
-                e.currentTarget.style.boxShadow = '0 16px 40px rgba(139, 111, 71, 0.18)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = '#d4af8f'
-                e.currentTarget.style.transform = ''
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(139, 111, 71, 0.10)'
-              }}
-            >
+            <>
               <div
-                className="h-14 w-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
-                style={{ background: 'rgba(212, 175, 143, 0.20)', border: '2px solid rgba(212, 175, 143, 0.50)' }}
+                key={i}
+                className="flex-1 rounded-2xl p-6 text-center transition-all duration-200"
+                style={{
+                  background: 'linear-gradient(135deg, #ffffff 0%, #f4e8d8 100%)',
+                  border: '2px solid #d4af8f',
+                  boxShadow: '0 8px 24px rgba(139, 111, 71, 0.10)',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = '#8b6f47'
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.boxShadow = '0 16px 40px rgba(139, 111, 71, 0.18)'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = '#d4af8f'
+                  e.currentTarget.style.transform = ''
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(139, 111, 71, 0.10)'
+                }}
               >
-                {step.icon}
+                <div
+                  className="h-14 w-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
+                  style={{ background: 'rgba(212, 175, 143, 0.20)', border: '2px solid rgba(212, 175, 143, 0.50)' }}
+                >
+                  {step.icon}
+                </div>
+                <h3 className="font-bold mb-2" style={{ color: '#2d2416' }}>{t(step.titleKey)}</h3>
+                <p className="text-sm leading-relaxed font-light" style={{ color: '#5a5246' }}>{t(step.descKey)}</p>
               </div>
-              <p className="text-xs font-bold mb-2" style={{ color: 'rgba(139, 111, 71, 0.55)', letterSpacing: '0.12em' }}>
-                {step.num}
-              </p>
-              <h3 className="font-bold mb-2" style={{ color: '#2d2416' }}>{t(step.titleKey)}</h3>
-              <p className="text-sm leading-relaxed font-light" style={{ color: '#5a5246' }}>{t(step.descKey)}</p>
-            </div>
+              {i < steps.length - 1 && (
+                <div key={`arrow-${i}`} className="flex-shrink-0 px-3 hidden sm:flex items-center" style={{ color: '#d4af8f' }}>
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <path d="M4 14h18M16 7l8 7-8 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              )}
+            </>
           ))}
         </div>
       </div>
