@@ -81,7 +81,7 @@ export default function Header() {
           <img
             src="/img3.png"
             alt="CryptoGive"
-            className="flex-shrink-0 rounded-xl object-cover"
+            className="flex-shrink-0 rounded-full object-cover"
             style={{
               width: '56px',
               height: '56px',
