@@ -83,8 +83,8 @@ export default function Header() {
             alt="CryptoGive"
             className="flex-shrink-0 rounded-xl object-cover"
             style={{
-              width: '80px',
-              height: '80px',
+              width: '56px',
+              height: '56px',
               border: '2px solid rgba(212, 175, 143, 0.60)',
               boxShadow: '0 6px 16px rgba(139, 111, 71, 0.30)',
             }}
