@@ -18,7 +18,7 @@ function StarOfDavid({ size = 14 }) {
 
 function BitcoinCoin() {
   return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+    <svg width="34" height="34" viewBox="0 0 28 28" fill="none">
       <circle cx="14" cy="14" r="13" fill="#cbd5e1"/>
       <circle cx="14" cy="14" r="11" fill="#e2e8f0"/>
       <circle cx="14" cy="14" r="11" stroke="#94a3b8" strokeWidth="1.2"/>
