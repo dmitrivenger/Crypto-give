@@ -28,7 +28,7 @@ app.use(helmet());
 app.use(cors({
   origin: [env.FRONTEND_URL, 'http://localhost:3000', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Wallet-Address'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Wallet-Address', 'X-Admin-Key'],
   credentials: true,
 }));
 

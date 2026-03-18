@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { WalletProvider, useWallet } from './contexts/WalletContext'
 import { DonationProvider } from './contexts/DonationContext'
 import { LanguageProvider } from './contexts/LanguageContext'
@@ -19,10 +19,11 @@ import Admin from './pages/Admin'
 // Wrapper that shows profile modal globally when needed
 function AppRoutes() {
   const { showProfileModal } = useWallet()
+  const { pathname } = useLocation()
 
   return (
     <>
-      {showProfileModal && <UserProfileModal />}
+      {showProfileModal && pathname !== '/admin' && <UserProfileModal />}
       <Routes>
         <Route path="/" element={<HomeOrDashboard />} />
         <Route path="/donate/:orgId" element={<Donate />} />
