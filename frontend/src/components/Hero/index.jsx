@@ -46,44 +46,60 @@ export default function Hero() {
       />
       <StarWatermark />
 
-      <div className="relative max-w-4xl mx-auto text-center">
+      <div className="relative max-w-5xl mx-auto">
 
         {/* Trust pill */}
-        <div
-          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold mb-8 uppercase tracking-widest"
-          style={{
-            background: 'rgba(212, 175, 143, 0.20)',
-            border: '1px solid rgba(212, 175, 143, 0.55)',
-            color: '#8b6f47',
-          }}
-        >
-          <span className="h-1.5 w-1.5 rounded-full" style={{ background: '#4ade80' }} />
-          {t('heroTagline')}
+        <div className="text-center mb-8">
+          <div
+            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest"
+            style={{
+              background: 'rgba(212, 175, 143, 0.20)',
+              border: '1px solid rgba(212, 175, 143, 0.55)',
+              color: '#8b6f47',
+            }}
+          >
+            <span className="h-1.5 w-1.5 rounded-full" style={{ background: '#4ade80' }} />
+            {t('heroTagline')}
+          </div>
         </div>
 
-        {/* Headline */}
-        <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] mb-4 tracking-tight">
-          <span style={{ color: '#2d2416' }}>{t('heroHeadline1')}</span>
-          <br />
-          <span className="text-gold">{t('heroHeadline2')}</span>
-        </h1>
+        {/* Headline + image side by side */}
+        <div className="flex items-center justify-center gap-8 mb-4">
+          <img
+            src="/img1.png"
+            alt=""
+            className="hidden sm:block flex-shrink-0 rounded-2xl object-cover"
+            style={{
+              width: '200px',
+              height: '200px',
+              border: '2px solid rgba(212, 175, 143, 0.50)',
+              boxShadow: '0 12px 40px rgba(139, 111, 71, 0.18)',
+            }}
+          />
+          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-center">
+            <span style={{ color: '#2d2416' }}>{t('heroHeadline1')}</span>
+            <br />
+            <span className="text-gold">{t('heroHeadline2')}</span>
+          </h1>
+        </div>
 
         {/* Subtle crypto note */}
-        <p className="text-xs font-medium mb-8 tracking-widest uppercase" style={{ color: 'rgba(139, 111, 71, 0.50)' }}>
+        <p className="text-xs font-medium mb-8 tracking-widest uppercase text-center" style={{ color: 'rgba(139, 111, 71, 0.50)' }}>
           {t('heroCryptoNote')}
         </p>
 
         {/* Sub */}
-        <p className="text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light" style={{ color: '#5a5246' }}>
+        <p className="text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-light text-center" style={{ color: '#5a5246' }}>
           {t('heroSubtext')}
         </p>
 
         {/* Hebrew blessing */}
-        <p className="text-sm mb-8 font-light" style={{ color: 'rgba(139, 111, 71, 0.70)', fontStyle: 'italic' }}>
+        <p className="text-sm mb-8 font-light text-center" style={{ color: 'rgba(139, 111, 71, 0.70)', fontStyle: 'italic' }}>
           "צְדָקָה תַּצִּיל מִמָּוֶת" — Tzedakah saves from death (Proverbs 10:2)
         </p>
 
         {/* CTA */}
+        <div className="text-center">
         <button
           onClick={connect}
           className="btn-primary btn-gold-shimmer text-base px-10 py-4 font-bold font-serif"
@@ -91,6 +107,7 @@ export default function Hero() {
         >
           {t('heroConnectBtn')}
         </button>
+        </div>
 
         {/* Stats */}
         <div className="mt-20 grid grid-cols-3 gap-6 max-w-xs mx-auto">

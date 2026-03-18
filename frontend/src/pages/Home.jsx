@@ -191,6 +191,18 @@ export default function Home() {
         <section className="py-20 px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-14">
+              <img
+                src="/img2.png"
+                alt=""
+                className="mx-auto mb-8 rounded-2xl object-cover"
+                style={{
+                  width: '100%',
+                  maxWidth: '720px',
+                  height: '260px',
+                  border: '2px solid rgba(212, 175, 143, 0.50)',
+                  boxShadow: '0 16px 48px rgba(139, 111, 71, 0.16)',
+                }}
+              />
               <h2 className="font-serif text-2xl font-bold mb-2" style={{ color: '#2d2416' }}>
                 {t('supportedOrgs')}
               </h2>
