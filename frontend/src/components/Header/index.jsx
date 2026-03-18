@@ -81,8 +81,8 @@ export default function Header() {
           <div
             className="flex-shrink-0 rounded-full overflow-hidden"
             style={{
-              width: '45px',
-              height: '45px',
+              width: '40px',
+              height: '40px',
               border: '2px solid rgba(212, 175, 143, 0.60)',
               boxShadow: '0 6px 16px rgba(139, 111, 71, 0.30)',
             }}
