@@ -78,16 +78,12 @@ export default function Header() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5">
-          <div
-            className="h-9 w-9 rounded-xl flex items-center justify-center text-sm flex-shrink-0"
-            style={{
-              background: 'linear-gradient(135deg, #d4af8f, #8b6f47)',
-              color: '#ffffff',
-              boxShadow: '0 6px 16px rgba(139, 111, 71, 0.30)',
-            }}
-          >
-            <StarOfDavid size={16} />
-          </div>
+          <img
+            src="/img3.png"
+            alt="CryptoGive"
+            className="h-9 w-9 rounded-xl object-cover flex-shrink-0"
+            style={{ boxShadow: '0 6px 16px rgba(139, 111, 71, 0.30)' }}
+          />
           <span className="font-serif font-bold text-base tracking-tight" style={{ color: '#2d2416' }}>
             Crypto<span style={{ color: '#8b6f47' }}>Give</span>
           </span>
