@@ -20,7 +20,7 @@ function HowItWorks() {
   const { t } = useLanguage()
   const steps = [
     { icon: '🔗', titleKey: 'step1Title', descKey: 'step1Desc', num: '01' },
-    { icon: '💸', titleKey: 'step2Title', descKey: 'step2Desc', num: '02' },
+    { icon: '🪙', titleKey: 'step2Title', descKey: 'step2Desc', num: '02' },
     { icon: '📄', titleKey: 'step3Title', descKey: 'step3Desc', num: '03' },
   ]
   return (
