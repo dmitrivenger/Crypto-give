@@ -78,17 +78,21 @@ export default function Header() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5">
-          <img
-            src="/img3.png"
-            alt="CryptoGive"
-            className="flex-shrink-0 rounded-full object-cover"
+          <div
+            className="flex-shrink-0 rounded-full overflow-hidden"
             style={{
               width: '56px',
               height: '56px',
               border: '2px solid rgba(212, 175, 143, 0.60)',
               boxShadow: '0 6px 16px rgba(139, 111, 71, 0.30)',
             }}
-          />
+          >
+            <img
+              src="/img3.png"
+              alt="CryptoGive"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.35)' }}
+            />
+          </div>
           <span className="font-serif font-bold text-base tracking-tight" style={{ color: '#2d2416' }}>
             Crypto<span style={{ color: '#8b6f47' }}>Give</span>
           </span>
