@@ -81,6 +81,17 @@ export default function Hero() {
             <br />
             <span className="text-gold">{t('heroHeadline2')}</span>
           </h1>
+          <img
+            src="/img1.png"
+            alt=""
+            className="hidden sm:block flex-shrink-0 rounded-2xl object-cover"
+            style={{
+              width: '200px',
+              height: '200px',
+              border: '2px solid rgba(212, 175, 143, 0.50)',
+              boxShadow: '0 12px 40px rgba(139, 111, 71, 0.18)',
+            }}
+          />
         </div>
 
         {/* Subtle crypto note */}
