@@ -74,15 +74,15 @@ export default function Header() {
         boxShadow: '0 8px 24px rgba(139, 111, 71, 0.12)',
       }}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-11">
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5">
           <div
             className="flex-shrink-0 rounded-full overflow-hidden"
             style={{
-              width: '56px',
-              height: '56px',
+              width: '45px',
+              height: '45px',
               border: '2px solid rgba(212, 175, 143, 0.60)',
               boxShadow: '0 6px 16px rgba(139, 111, 71, 0.30)',
             }}
