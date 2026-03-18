@@ -19,13 +19,14 @@ function StarOfDavid({ size = 14 }) {
 function BitcoinCoin() {
   return (
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <circle cx="14" cy="14" r="13" fill="#f59e0b" fillOpacity="0.85"/>
-      <circle cx="14" cy="14" r="11" fill="#fbbf24" fillOpacity="0.5"/>
-      <ellipse cx="10" cy="9" rx="4" ry="2" fill="white" fillOpacity="0.3" transform="rotate(-20 10 9)"/>
-      <path d="M12 8.5h4a2 2 0 0 1 0 4h-4M12 12.5h4.5a2 2 0 0 1 0 4H12" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
-      <line x1="12" y1="8.5" x2="12" y2="16.5" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
-      <line x1="13.5" y1="7" x2="13.5" y2="8.5" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="13.5" y1="16.5" x2="13.5" y2="18" stroke="white" strokeWidth="1.4" strokeLinecap="round"/>
+      <circle cx="14" cy="14" r="13" fill="#cbd5e1"/>
+      <circle cx="14" cy="14" r="11" fill="#e2e8f0"/>
+      <circle cx="14" cy="14" r="11" stroke="#94a3b8" strokeWidth="1.2"/>
+      <ellipse cx="10" cy="9" rx="4" ry="2" fill="white" fillOpacity="0.55" transform="rotate(-20 10 9)"/>
+      <path d="M12 8.5h4a2 2 0 0 1 0 4h-4M12 12.5h4.5a2 2 0 0 1 0 4H12" stroke="#475569" strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="12" y1="8.5" x2="12" y2="16.5" stroke="#475569" strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="13.5" y1="7" x2="13.5" y2="8.5" stroke="#475569" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="13.5" y1="16.5" x2="13.5" y2="18" stroke="#475569" strokeWidth="1.4" strokeLinecap="round"/>
     </svg>
   )
 }
@@ -66,10 +67,10 @@ function HowItWorks() {
                 }}
               >
                 <div
-                  className="h-14 w-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
-                  style={{ background: 'rgba(212, 175, 143, 0.20)', border: '2px solid rgba(212, 175, 143, 0.50)' }}
+                  className="h-14 w-14 rounded-2xl flex items-center justify-center mx-auto mb-4 overflow-hidden"
+                  style={{ background: 'rgba(212, 175, 143, 0.20)', border: '2px solid rgba(212, 175, 143, 0.50)', fontSize: '1.95rem' }}
                 >
-                  {step.icon}
+                  <span style={{ display: 'inline-flex', transform: 'scale(1.3)' }}>{step.icon}</span>
                 </div>
                 <h3 className="font-bold mb-2" style={{ color: '#2d2416' }}>{t(step.titleKey)}</h3>
                 <p className="text-sm leading-relaxed font-light" style={{ color: '#5a5246' }}>{t(step.descKey)}</p>
