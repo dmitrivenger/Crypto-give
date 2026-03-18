@@ -19,76 +19,9 @@ function StarOfDavid({ size = 14 }) {
 function HowItWorks() {
   const { t } = useLanguage()
   const steps = [
-    {
-      num: '01',
-      titleKey: 'step1Title',
-      descKey: 'step1Desc',
-      gradient: 'linear-gradient(145deg, #bfdbfe, #93c5fd)',
-      shadow: 'rgba(147, 197, 253, 0.45)',
-      icon: (
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          {/* Chain links */}
-          <rect x="4" y="13" width="10" height="6" rx="3" fill="#1d4ed8" fillOpacity="0.18" stroke="#2563eb" strokeWidth="1.8"/>
-          <rect x="22" y="13" width="10" height="6" rx="3" fill="#1d4ed8" fillOpacity="0.18" stroke="#2563eb" strokeWidth="1.8"/>
-          <line x1="14" y1="16" x2="22" y2="16" stroke="#2563eb" strokeWidth="1.8"/>
-          {/* Top block */}
-          <rect x="12" y="4" width="12" height="8" rx="2.5" fill="#3b82f6" fillOpacity="0.25" stroke="#2563eb" strokeWidth="1.8"/>
-          <line x1="18" y1="12" x2="18" y2="13" stroke="#2563eb" strokeWidth="1.8"/>
-          {/* Bottom block */}
-          <rect x="12" y="24" width="12" height="8" rx="2.5" fill="#3b82f6" fillOpacity="0.25" stroke="#2563eb" strokeWidth="1.8"/>
-          <line x1="18" y1="19" x2="18" y2="24" stroke="#2563eb" strokeWidth="1.8"/>
-          {/* Shine */}
-          <rect x="13" y="5" width="4" height="2" rx="1" fill="white" fillOpacity="0.45"/>
-          <rect x="13" y="25" width="4" height="2" rx="1" fill="white" fillOpacity="0.45"/>
-        </svg>
-      ),
-    },
-    {
-      num: '02',
-      titleKey: 'step2Title',
-      descKey: 'step2Desc',
-      gradient: 'linear-gradient(145deg, #bbf7d0, #6ee7b7)',
-      shadow: 'rgba(110, 231, 183, 0.45)',
-      icon: (
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          {/* Coin body */}
-          <ellipse cx="18" cy="19" rx="11" ry="4" fill="#065f46" fillOpacity="0.15"/>
-          <circle cx="18" cy="16" r="11" fill="#d1fae5" stroke="#059669" strokeWidth="1.8"/>
-          <circle cx="18" cy="16" r="8" fill="#a7f3d0" fillOpacity="0.5" stroke="#059669" strokeWidth="1.2"/>
-          {/* ₿ symbol */}
-          <path d="M16 11h3.5a2 2 0 0 1 0 4H16M16 15h4a2 2 0 0 1 0 4h-4" stroke="#065f46" strokeWidth="1.7" strokeLinecap="round"/>
-          <line x1="16" y1="11" x2="16" y2="19" stroke="#065f46" strokeWidth="1.7" strokeLinecap="round"/>
-          <line x1="17.5" y1="9.5" x2="17.5" y2="11" stroke="#065f46" strokeWidth="1.5" strokeLinecap="round"/>
-          <line x1="17.5" y1="19" x2="17.5" y2="20.5" stroke="#065f46" strokeWidth="1.5" strokeLinecap="round"/>
-          {/* Shine */}
-          <ellipse cx="13" cy="12" rx="3" ry="1.5" fill="white" fillOpacity="0.50" transform="rotate(-30 13 12)"/>
-        </svg>
-      ),
-    },
-    {
-      num: '03',
-      titleKey: 'step3Title',
-      descKey: 'step3Desc',
-      gradient: 'linear-gradient(145deg, #bfdbfe, #bbf7d0)',
-      shadow: 'rgba(147, 197, 253, 0.35)',
-      icon: (
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          {/* Doc shadow */}
-          <rect x="10" y="6" width="17" height="23" rx="2.5" fill="#1d4ed8" fillOpacity="0.08"/>
-          {/* Doc body */}
-          <rect x="8" y="4" width="17" height="23" rx="2.5" fill="#eff6ff" stroke="#2563eb" strokeWidth="1.7"/>
-          {/* Folded corner */}
-          <path d="M21 4 L25 8 H21 V4Z" fill="#bfdbfe" stroke="#2563eb" strokeWidth="1.4"/>
-          {/* Dollar badge */}
-          <circle cx="22" cy="26" r="6" fill="#d1fae5" stroke="#059669" strokeWidth="1.7"/>
-          <path d="M22 22.5v7M20.5 24.2a1.5 1.5 0 0 1 3 0c0 .8-1.5 1.5-1.5 1.5s-1.5.7-1.5 1.5a1.5 1.5 0 0 0 3 0" stroke="#065f46" strokeWidth="1.4" strokeLinecap="round"/>
-          {/* Lines */}
-          <line x1="11" y1="14" x2="20" y2="14" stroke="#2563eb" strokeWidth="1.4" strokeLinecap="round"/>
-          <line x1="11" y1="18" x2="18" y2="18" stroke="#2563eb" strokeWidth="1.4" strokeLinecap="round"/>
-          <line x1="11" y1="22" x2="15" y2="22" stroke="#2563eb" strokeWidth="1.4" strokeLinecap="round"/>
-        </svg>
-      ),
-    },
+    { icon: '🔗', titleKey: 'step1Title', descKey: 'step1Desc', num: '01' },
+    { icon: '💸', titleKey: 'step2Title', descKey: 'step2Desc', num: '02' },
+    { icon: '📄', titleKey: 'step3Title', descKey: 'step3Desc', num: '03' },
   ]
   return (
     <section className="py-20 px-4" style={{ borderTop: '1px solid rgba(212, 175, 143, 0.30)' }}>
@@ -118,12 +51,8 @@ function HowItWorks() {
               }}
             >
               <div
-                className="h-14 w-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                style={{
-                  background: step.gradient,
-                  boxShadow: `0 6px 18px ${step.shadow}, inset 0 1px 0 rgba(255,255,255,0.6)`,
-                  border: '1px solid rgba(255,255,255,0.5)',
-                }}
+                className="h-14 w-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
+                style={{ background: 'rgba(212, 175, 143, 0.20)', border: '2px solid rgba(212, 175, 143, 0.50)' }}
               >
                 {step.icon}
               </div>
