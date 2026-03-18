@@ -135,21 +135,24 @@ function OrgPreviewCard({ organization }) {
           ))}
         </div>
       )}
-      {organization.website ? (
-        <a
-          href={organization.website}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={e => e.stopPropagation()}
-          className="btn-primary w-full mt-auto text-center"
-        >
-          {t('visitWebsite')}
-        </a>
-      ) : (organization.blockchains || []).length > 0 ? (
-        <button onClick={e => { e.stopPropagation(); connect() }} className="btn-primary w-full mt-auto">
-          {t('connectToDonate')}
-        </button>
-      ) : null}
+      <div className="flex flex-col gap-2 mt-auto">
+        {(organization.blockchains || []).length > 0 && (
+          <button onClick={e => { e.stopPropagation(); connect() }} className="btn-primary w-full">
+            {t('connectToDonate')}
+          </button>
+        )}
+        {organization.website && (
+          <a
+            href={organization.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={e => e.stopPropagation()}
+            className="btn-secondary w-full text-center"
+          >
+            {t('visitWebsite')}
+          </a>
+        )}
+      </div>
     </div>
   )
 }
