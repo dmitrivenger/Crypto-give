@@ -90,7 +90,7 @@ export default function Header() {
             <img
               src="/img3.png"
               alt="CryptoGive"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.55)' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.70)' }}
             />
           </div>
           <span className="font-serif font-bold text-base tracking-tight" style={{ color: '#2d2416' }}>
