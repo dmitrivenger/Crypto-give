@@ -16,12 +16,74 @@ function StarOfDavid({ size = 14 }) {
   )
 }
 
+function IconWallet() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Blockchain nodes */}
+      <circle cx="16" cy="6" r="3" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="6" cy="22" r="3" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="26" cy="22" r="3" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="16" cy="6" r="3" />
+      <circle cx="6" cy="22" r="3" />
+      <circle cx="26" cy="22" r="3" />
+      {/* Links between nodes */}
+      <line x1="16" y1="9" x2="6" y2="19" />
+      <line x1="16" y1="9" x2="26" y2="19" />
+      <line x1="9" y1="22" x2="23" y2="22" />
+      {/* Wallet card */}
+      <rect x="10" y="26" width="12" height="4" rx="1.5" strokeWidth="1.4" />
+      <line x1="14" y1="28" x2="18" y2="28" strokeWidth="1.4" />
+    </svg>
+  )
+}
+
+function IconCrypto() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Main coin */}
+      <circle cx="16" cy="16" r="9" fill="currentColor" fillOpacity="0.10" />
+      <circle cx="16" cy="16" r="9" />
+      {/* Bitcoin B symbol */}
+      <path d="M14 11.5h4a2.5 2.5 0 0 1 0 5h-4M14 16.5h4.5a2.5 2.5 0 0 1 0 5H14" strokeWidth="1.6" />
+      <line x1="14" y1="11.5" x2="14" y2="21.5" strokeWidth="1.6" />
+      <line x1="15.5" y1="10" x2="15.5" y2="11.5" strokeWidth="1.6" />
+      <line x1="15.5" y1="21.5" x2="15.5" y2="23" strokeWidth="1.6" />
+      {/* Small orbiting coins */}
+      <circle cx="5" cy="10" r="2.5" fill="currentColor" fillOpacity="0.10" />
+      <circle cx="5" cy="10" r="2.5" strokeWidth="1.4" />
+      <line x1="5" y1="8.2" x2="5" y2="11.8" strokeWidth="1.2" />
+      <circle cx="27" cy="22" r="2.5" fill="currentColor" fillOpacity="0.10" />
+      <circle cx="27" cy="22" r="2.5" strokeWidth="1.4" />
+      <line x1="27" y1="20.2" x2="27" y2="23.8" strokeWidth="1.2" />
+    </svg>
+  )
+}
+
+function IconTaxReport() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Document */}
+      <rect x="6" y="3" width="16" height="22" rx="2" fill="currentColor" fillOpacity="0.10" />
+      <rect x="6" y="3" width="16" height="22" rx="2" />
+      {/* Folded corner */}
+      <path d="M18 3 L22 7" />
+      <path d="M18 3 v4 h4" strokeWidth="1.4" />
+      {/* Dollar sign circle */}
+      <circle cx="14" cy="15" r="4.5" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="14" cy="15" r="4.5" strokeWidth="1.5" />
+      <path d="M14 11.5v7M12.2 13.2a1.8 1.8 0 0 1 3.6 0c0 1-1.8 1.8-1.8 1.8s-1.8.8-1.8 1.8a1.8 1.8 0 0 0 3.6 0" strokeWidth="1.4" />
+      {/* Lines at bottom */}
+      <line x1="9" y1="23" x2="19" y2="23" strokeWidth="1.3" />
+    </svg>
+  )
+}
+
 function HowItWorks() {
   const { t } = useLanguage()
   const steps = [
-    { icon: '🔗', titleKey: 'step1Title', descKey: 'step1Desc', num: '01' },
-    { icon: '💸', titleKey: 'step2Title', descKey: 'step2Desc', num: '02' },
-    { icon: '📄', titleKey: 'step3Title', descKey: 'step3Desc', num: '03' },
+    { icon: <IconWallet />, titleKey: 'step1Title', descKey: 'step1Desc', num: '01' },
+    { icon: <IconCrypto />, titleKey: 'step2Title', descKey: 'step2Desc', num: '02' },
+    { icon: <IconTaxReport />, titleKey: 'step3Title', descKey: 'step3Desc', num: '03' },
   ]
   return (
     <section className="py-20 px-4" style={{ borderTop: '1px solid rgba(212, 175, 143, 0.30)' }}>
@@ -51,8 +113,8 @@ function HowItWorks() {
               }}
             >
               <div
-                className="h-14 w-14 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4"
-                style={{ background: 'rgba(212, 175, 143, 0.20)', border: '2px solid rgba(212, 175, 143, 0.50)' }}
+                className="h-14 w-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                style={{ background: 'rgba(212, 175, 143, 0.20)', border: '2px solid rgba(212, 175, 143, 0.50)', color: '#8b6f47' }}
               >
                 {step.icon}
               </div>
