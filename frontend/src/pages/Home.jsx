@@ -128,18 +128,14 @@ function OrgPreviewCard({ organization }) {
           {organization.description}
         </p>
       )}
-      {(organization.blockchains || []).length > 0 && (
+      {!organization.website && (organization.blockchains || []).length > 0 && (
         <div className="flex flex-wrap gap-1.5 mb-4">
           {organization.blockchains.map(b => (
             <span key={b.name} className="badge-chain">{BLOCKCHAIN_LABELS[b.name] || b.name}</span>
           ))}
         </div>
       )}
-      {(organization.blockchains || []).length > 0 ? (
-        <button onClick={e => { e.stopPropagation(); connect() }} className="btn-primary w-full mt-auto">
-          {t('connectToDonate')}
-        </button>
-      ) : organization.website ? (
+      {organization.website ? (
         <a
           href={organization.website}
           target="_blank"
@@ -147,8 +143,12 @@ function OrgPreviewCard({ organization }) {
           onClick={e => e.stopPropagation()}
           className="btn-primary w-full mt-auto text-center"
         >
-          Visit Website ↗
+          {t('visitWebsite')}
         </a>
+      ) : (organization.blockchains || []).length > 0 ? (
+        <button onClick={e => { e.stopPropagation(); connect() }} className="btn-primary w-full mt-auto">
+          {t('connectToDonate')}
+        </button>
       ) : null}
     </div>
   )
