@@ -15,58 +15,6 @@ function StarWatermark() {
   )
 }
 
-function MenorahWatermark() {
-  return (
-    <svg
-      viewBox="0 0 200 260"
-      fill="none"
-      className="absolute pointer-events-none select-none"
-      style={{ color: 'rgba(212, 175, 143, 0.13)', width: '340px', height: '340px', bottom: '-40px', left: '-60px' }}
-    >
-      {/* Base */}
-      <rect x="72" y="238" width="56" height="10" rx="5" fill="currentColor" />
-      {/* Stem foot */}
-      <rect x="88" y="222" width="24" height="18" rx="3" fill="currentColor" />
-      {/* Center shaft */}
-      <rect x="97" y="100" width="6" height="124" rx="3" fill="currentColor" />
-
-      {/* Arms — arching out then up. Each arm: horizontal + vertical segment */}
-      {/* Arm widths from center: 28, 56, 84 */}
-
-      {/* Outer left arm */}
-      <path d="M100 172 Q72 172 72 140 L72 100" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
-      {/* Mid left arm */}
-      <path d="M100 172 Q86 172 86 152 L86 100" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
-      {/* Inner left arm */}
-      <path d="M100 172 Q93 172 93 160 L93 100" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
-
-      {/* Outer right arm */}
-      <path d="M100 172 Q128 172 128 140 L128 100" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
-      {/* Mid right arm */}
-      <path d="M100 172 Q114 172 114 152 L114 100" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
-      {/* Inner right arm */}
-      <path d="M100 172 Q107 172 107 160 L107 100" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" fill="none"/>
-
-      {/* Candle holders (cups at top of each arm) */}
-      {[72, 86, 93, 100, 107, 114, 128].map((x, i) => (
-        <g key={i}>
-          <rect x={x - 4} y="88" width="8" height="14" rx="2" fill="currentColor" />
-        </g>
-      ))}
-
-      {/* Candles */}
-      {[72, 86, 93, 100, 107, 114, 128].map((x, i) => (
-        <rect key={i} x={x - 2.5} y="60" width="5" height="30" rx="2.5" fill="currentColor" />
-      ))}
-
-      {/* Flames */}
-      {[72, 86, 93, 100, 107, 114, 128].map((x, i) => (
-        <ellipse key={i} cx={x} cy="53" rx="4" ry="7" fill="currentColor" />
-      ))}
-    </svg>
-  )
-}
-
 export default function Hero() {
   const { connect } = useWallet()
   const { t } = useLanguage()
@@ -97,7 +45,6 @@ export default function Hero() {
           filter: 'blur(30px)' }}
       />
       <StarWatermark />
-      <MenorahWatermark />
 
       <div className="relative max-w-4xl mx-auto text-center">
 
