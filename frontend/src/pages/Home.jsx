@@ -23,10 +23,10 @@ function BitcoinCoin() {
       <circle cx="14" cy="14" r="11" fill="#e2e8f0"/>
       <circle cx="14" cy="14" r="11" stroke="#94a3b8" strokeWidth="1.2"/>
       <ellipse cx="10" cy="9" rx="4" ry="2" fill="white" fillOpacity="0.55" transform="rotate(-20 10 9)"/>
-      <path d="M12 8.5h4a2 2 0 0 1 0 4h-4M12 12.5h4.5a2 2 0 0 1 0 4H12" stroke="#475569" strokeWidth="1.6" strokeLinecap="round"/>
-      <line x1="12" y1="8.5" x2="12" y2="16.5" stroke="#475569" strokeWidth="1.6" strokeLinecap="round"/>
-      <line x1="13.5" y1="7" x2="13.5" y2="8.5" stroke="#475569" strokeWidth="1.4" strokeLinecap="round"/>
-      <line x1="13.5" y1="16.5" x2="13.5" y2="18" stroke="#475569" strokeWidth="1.4" strokeLinecap="round"/>
+      <path d="M12 10h4a2 2 0 0 1 0 4h-4M12 14h4.5a2 2 0 0 1 0 4H12" stroke="#475569" strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="12" y1="10" x2="12" y2="18" stroke="#475569" strokeWidth="1.6" strokeLinecap="round"/>
+      <line x1="13.5" y1="8.5" x2="13.5" y2="10" stroke="#475569" strokeWidth="1.4" strokeLinecap="round"/>
+      <line x1="13.5" y1="18" x2="13.5" y2="19.5" stroke="#475569" strokeWidth="1.4" strokeLinecap="round"/>
     </svg>
   )
 }
@@ -44,7 +44,7 @@ function HowItWorks() {
         <h2 className="font-serif text-2xl font-bold text-center mb-14" style={{ color: '#2d2416' }}>
           {t('howItWorks')}
         </h2>
-        <div className="flex items-center justify-center gap-0">
+        <div className="flex items-stretch justify-center gap-0">
           {steps.map((step, i) => (
             <>
               <div
