@@ -48,5 +48,5 @@ export function formatTxHash(hash) {
 export function getTxLink(blockchain, txHash) {
   const base = BLOCKCHAIN_EXPLORERS[blockchain]
   if (!base || !txHash) return null
-  return `${base}/tx/${txHash}`
+  return `${base}/${txHash}`
 }

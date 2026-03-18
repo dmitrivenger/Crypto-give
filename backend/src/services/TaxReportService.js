@@ -13,6 +13,13 @@ function formatDate(dateStr) {
   return new Date(dateStr).toISOString().split('T')[0];
 }
 
+function formatDateTime(dateStr) {
+  const d = new Date(dateStr);
+  const date = d.toISOString().split('T')[0];
+  const time = d.toISOString().split('T')[1].substring(0, 8);
+  return `${date} ${time} UTC`;
+}
+
 function divider(doc) {
   doc.moveDown(0.8);
   doc.moveTo(50, doc.y).lineTo(doc.page.width - 50, doc.y).strokeColor('#cccccc').stroke();
@@ -101,13 +108,13 @@ async function generatePDFReport(walletAddress, year, donations, _orgs, user) {
 
     // Column layout
     const cols = {
-      date:     { x: 50,  w: 68,  label: 'Date' },
-      org:      { x: 118, w: 70,  label: 'Organization' },
-      amount:   { x: 188, w: 70,  label: 'Amount' },
-      usd:      { x: 258, w: 55,  label: 'USD Value' },
-      chain:    { x: 313, w: 55,  label: 'Blockchain' },
-      from:     { x: 368, w: 85,  label: 'From Address' },
-      to:       { x: 453, w: 85,  label: 'To Address' },
+      date:     { x: 50,  w: 100, label: 'Date & Time (UTC)' },
+      org:      { x: 150, w: 65,  label: 'Organization' },
+      amount:   { x: 215, w: 65,  label: 'Amount' },
+      usd:      { x: 280, w: 50,  label: 'USD Value' },
+      chain:    { x: 330, w: 50,  label: 'Blockchain' },
+      from:     { x: 380, w: 75,  label: 'From Address' },
+      to:       { x: 455, w: 80,  label: 'To Address' },
     };
 
     const tableTop = doc.y;
@@ -127,7 +134,7 @@ async function generatePDFReport(walletAddress, year, donations, _orgs, user) {
       const toShort = d.to_address ? `${d.to_address.slice(0, 8)}...${d.to_address.slice(-6)}` : '—';
 
       const row = [
-        formatDate(d.created_at || d.date),
+        formatDateTime(d.created_at || d.date),
         d.org_name || '',
         `${parseFloat(d.amount).toFixed(4)} ${d.token}`,
         d.amount_usd ? formatUSD(d.amount_usd) : '—',
@@ -149,7 +156,10 @@ async function generatePDFReport(walletAddress, year, donations, _orgs, user) {
     donations.forEach(d => {
       if (doc.y > doc.page.height - 80) doc.addPage();
 
-      doc.font('Helvetica-Bold').text('TX Hash:', left, doc.y, { continued: true })
+      doc.font('Helvetica-Bold').text('Date & Time:', left, doc.y, { continued: true })
+        .font('Helvetica').text(`  ${formatDateTime(d.created_at || d.date)}`);
+
+      doc.font('Helvetica-Bold').text('TX Hash:', left + 20, doc.y, { continued: true })
         .font('Helvetica').text(`  ${d.tx_hash}`);
 
       doc.font('Helvetica-Bold').text('From:', left + 20, doc.y, { continued: true })

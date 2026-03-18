@@ -80,6 +80,7 @@ function OrgPreviewCard({ organization }) {
         border: '2px solid #d4af8f',
         boxShadow: '0 12px 32px rgba(139, 111, 71, 0.10)',
       }}
+      onClick={() => { if (organization.websiteUrl) window.open(organization.websiteUrl, '_blank', 'noopener,noreferrer') }}
       onMouseEnter={e => {
         e.currentTarget.style.borderColor = '#8b6f47'
         e.currentTarget.style.transform = 'translateY(-6px)'
@@ -111,7 +112,7 @@ function OrgPreviewCard({ organization }) {
           <span key={b.name} className="badge-chain">{BLOCKCHAIN_LABELS[b.name] || b.name}</span>
         ))}
       </div>
-      <button onClick={connect} className="btn-primary w-full mt-auto">
+      <button onClick={e => { e.stopPropagation(); connect() }} className="btn-primary w-full mt-auto">
         {t('connectToDonate')}
       </button>
     </div>

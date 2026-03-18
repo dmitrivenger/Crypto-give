@@ -6,6 +6,7 @@ import { initiateDonation } from '../../services/api'
 import { TOKENS_BY_BLOCKCHAIN, BLOCKCHAIN_LABELS } from '../../utils/constants'
 
 const MIN_DONATION_USD = 1
+const MAX_DONATION_USD = 990
 import { formatUSD, formatAddress } from '../../utils/formatters'
 import { isValidAmount } from '../../utils/validators'
 import LoadingSpinner from '../LoadingSpinner'
@@ -192,15 +193,25 @@ export default function DonationForm({ organization }) {
         </div>
 
         {/* USD value */}
-        <div className="mt-2 h-5">
+        <div className="mt-2 min-h-5">
           {priceLoading ? (
             <span className="text-xs font-light" style={{ color: '#5a5246' }}>Fetching price...</span>
           ) : usdValue !== null ? (
-            <span className={`text-sm font-bold ${usdValue < MIN_DONATION_USD ? 'text-yellow-600' : ''}`}
-              style={usdValue >= MIN_DONATION_USD ? { color: '#2d7a3a' } : {}}>
-              ≈ {formatUSD(usdValue)}
-              {usdValue < MIN_DONATION_USD && ' (below $1 minimum)'}
-            </span>
+            <>
+              <span
+                className="text-sm font-bold"
+                style={{ color: usdValue > MAX_DONATION_USD ? '#b91c1c' : usdValue < MIN_DONATION_USD ? '#92400e' : '#2d7a3a' }}
+              >
+                ≈ {formatUSD(usdValue)}
+                {usdValue < MIN_DONATION_USD && ' (below $1 minimum)'}
+                {usdValue > MAX_DONATION_USD && ' (exceeds $990 limit)'}
+              </span>
+              {usdValue > MAX_DONATION_USD && (
+                <p className="text-xs mt-1 font-light" style={{ color: '#b91c1c' }}>
+                  We're sorry — we cannot accept more than $990 per transaction due to regulatory requirements. Please reduce the amount.
+                </p>
+              )}
+            </>
           ) : null}
         </div>
       </div>
@@ -213,7 +224,7 @@ export default function DonationForm({ organization }) {
 
       <button
         type="submit"
-        disabled={submitting || !isValidAmount(donationAmount)}
+        disabled={submitting || !isValidAmount(donationAmount) || (usdValue !== null && usdValue > MAX_DONATION_USD)}
         className="btn-primary w-full text-base py-4"
       >
         {submitting ? (

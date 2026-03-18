@@ -49,6 +49,16 @@ async function initiateDonation(walletAddress, orgId, amount, token, blockchain)
   const priceUsd = await CryptoPriceService.getPriceAtDate(token, today);
   const amountUsd = priceUsd ? calculateUsdValue(amount, priceUsd) : null;
 
+  // Enforce $990 USD maximum (KYC threshold)
+  if (amountUsd !== null && amountUsd > 990) {
+    const err = new Error(
+      `We're sorry, but we cannot accept donations exceeding $990 USD in a single transaction to comply with regulatory requirements. Your donation would be approximately $${amountUsd.toFixed(2)}. Please reduce the amount and try again.`
+    );
+    err.status = 400;
+    err.code = 'AMOUNT_EXCEEDS_LIMIT';
+    throw err;
+  }
+
   const donationId = `temp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   const expiresAt = new Date(Date.now() + 60 * 60 * 1000).toISOString(); // 1 hour
 
