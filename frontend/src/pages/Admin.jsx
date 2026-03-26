@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-const API = '/v1/admin'
+const API = `${import.meta.env.VITE_API_URL || '/v1'}/admin`
 
 function formatUSD(n) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parseFloat(n) || 0)
@@ -277,9 +277,9 @@ export default function Admin() {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.byOrg.length === 0 ? (
+                    {(data.byOrg || []).length === 0 ? (
                       <tr><td colSpan={4} style={{ ...tdStyle(0), textAlign: 'center', color: '#5a5246' }}>No data</td></tr>
-                    ) : data.byOrg.map((r, i) => (
+                    ) : (data.byOrg || []).map((r, i) => (
                       <tr key={r.org_id}>
                         <td style={tdStyle(i)}><span className="font-bold">{r.org_name}</span></td>
                         <td style={tdStyle(i)}>{r.org_tax_id}</td>
@@ -307,9 +307,9 @@ export default function Admin() {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.byAddress.length === 0 ? (
+                    {(data.byAddress || []).length === 0 ? (
                       <tr><td colSpan={7} style={{ ...tdStyle(0), textAlign: 'center', color: '#5a5246' }}>No data</td></tr>
-                    ) : data.byAddress.map((r, i) => (
+                    ) : (data.byAddress || []).map((r, i) => (
                       <tr key={`${r.org_id}-${r.to_address}`}>
                         <td style={tdStyle(i)}>{r.org_name}</td>
                         <td style={tdStyle(i)}><span className="badge-chain">{r.blockchain}</span></td>
