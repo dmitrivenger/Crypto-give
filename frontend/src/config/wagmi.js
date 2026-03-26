@@ -9,7 +9,7 @@ export const projectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || 'YOUR_
 const metadata = {
   name: 'CryptoGive',
   description: 'Donate crypto, get tax receipts',
-  url: 'http://localhost:3000',
+  url: import.meta.env.VITE_APP_URL || 'http://localhost:3000',
   icons: [],
 }
 
