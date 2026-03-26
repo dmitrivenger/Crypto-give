@@ -10,7 +10,7 @@ export default function useOrganizations() {
     let cancelled = false
     setLoading(true)
     getOrganizations()
-      .then(data => { if (!cancelled) setOrganizations(data) })
+      .then(data => { if (!cancelled) setOrganizations(Array.isArray(data) ? data : []) })
       .catch(err => { if (!cancelled) setError(err.message) })
       .finally(() => { if (!cancelled) setLoading(false) })
     return () => { cancelled = true }
